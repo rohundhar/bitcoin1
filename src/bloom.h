@@ -54,7 +54,7 @@ private:
     unsigned int Hash(unsigned int nHashNum, const std::vector<unsigned char>& vDataToHash) const;
 
     // Private constructor for CRollingBloomFilter, no restrictions on size
-    CBloomFilter(unsigned int nElements, double nFPRate, unsigned int nTweak);
+    CBloomFilter(unsigned int nElements, const double nFPRate, unsigned int nTweak);
     friend class CRollingBloomFilter;
 
 public:
@@ -67,7 +67,7 @@ public:
      * It should generally always be a random value (and is largely only exposed for unit testing)
      * nFlags should be one of the BLOOM_UPDATE_* enums (not _MASK)
      */
-    CBloomFilter(unsigned int nElements, double nFPRate, unsigned int nTweak, unsigned char nFlagsIn);
+    CBloomFilter(unsigned int nElements, const double nFPRate, unsigned int nTweak, unsigned char nFlagsIn);
     CBloomFilter() : isFull(true), isEmpty(false), nHashFuncs(0), nTweak(0), nFlags(0) {}
 
     ADD_SERIALIZE_METHODS;
@@ -122,7 +122,7 @@ public:
     // A random bloom filter calls GetRand() at creation time.
     // Don't create global CRollingBloomFilter objects, as they may be
     // constructed before the randomizer is properly initialized.
-    CRollingBloomFilter(unsigned int nElements, double nFPRate);
+    CRollingBloomFilter(unsigned int nElements, const double nFPRate);
 
     void insert(const std::vector<unsigned char>& vKey);
     void insert(const uint256& hash);

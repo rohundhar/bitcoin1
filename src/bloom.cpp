@@ -21,7 +21,7 @@
 
 using namespace std;
 
-CBloomFilter::CBloomFilter(unsigned int nElements, double nFPRate, unsigned int nTweakIn, unsigned char nFlagsIn) :
+CBloomFilter::CBloomFilter(unsigned int nElements, const double nFPRate, unsigned int nTweakIn, unsigned char nFlagsIn) :
     /**
      * The ideal size for a bloom filter with a given number of elements and false positive rate is:
      * - nElements * log(fp rate) / ln(2)^2
@@ -42,7 +42,7 @@ CBloomFilter::CBloomFilter(unsigned int nElements, double nFPRate, unsigned int 
 }
 
 // Private constructor used by CRollingBloomFilter
-CBloomFilter::CBloomFilter(unsigned int nElements, double nFPRate, unsigned int nTweakIn) :
+CBloomFilter::CBloomFilter(unsigned int nElements, const double nFPRate, unsigned int nTweakIn) :
     vData((unsigned int)(-1  / LN2SQUARED * nElements * log(nFPRate)) / 8),
     isFull(false),
     isEmpty(true),
